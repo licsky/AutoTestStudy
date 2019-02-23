@@ -25,7 +25,7 @@ public class UpdateUserInfoTest {
         System.out.println(TestConfig.updateUserInfoUrl);
 
         int result = getResult(updateUserInfoCase);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         User user = session.selectOne(updateUserInfoCase.getExpected(),updateUserInfoCase);
 
         Assert.assertNotNull(user);
@@ -43,7 +43,7 @@ public class UpdateUserInfoTest {
 
 
         int result = getResult(updateUserInfoCase);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         User user = session.selectOne(updateUserInfoCase.getExpected(),updateUserInfoCase);
         Assert.assertNotNull(user);
         Assert.assertNotNull(result);

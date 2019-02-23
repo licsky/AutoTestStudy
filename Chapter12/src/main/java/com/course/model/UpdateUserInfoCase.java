@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UpdateUserInfoCase {
     private int id;
-    private String userId;
+    private int userId;
     private String userName;
     private String sex;
     private String age;

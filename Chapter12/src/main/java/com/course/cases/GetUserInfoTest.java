@@ -23,14 +23,13 @@ import java.util.List;
 public class GetUserInfoTest {
 
     @Test(dependsOnGroups = "loginTrue",description = "获取userId为1的用户信息")
-    public void getUserInfo() throws IOException, InterruptedException {
+    public void getUserInfo() throws IOException {
         SqlSession session = DatabaseUtil.getSqlSession();
         GetUserInfoCase getUserInfoCase = session.selectOne("getUserInfoCase",1);
         System.out.println(getUserInfoCase.toString());
         System.out.println(TestConfig.getUserInfoUrl);
 
         JSONArray resultJson = getJsonResult(getUserInfoCase);
-        Thread.sleep(5000);
         User user = session.selectOne(getUserInfoCase.getExpected(),getUserInfoCase);
 
         List userList = new ArrayList();
