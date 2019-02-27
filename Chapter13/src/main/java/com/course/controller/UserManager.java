@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +27,21 @@ public class UserManager {
     public Boolean login(HttpServletResponse response, @RequestBody User user) {
         int i = template.selectOne("login", user);
         Cookie cookie = new Cookie("login", "true");
+//        response.addCookie(cookie);
+        log.info("查询到到结果是" + i);
+        if (i == 1) {
+            response.addCookie(cookie);
+            log.info("登陆的用户是：" + user.getUserName());
+            return true;
+        }
+        return false;
+    }
+
+    @ApiOperation(value = "登陆接口param", httpMethod = "POST")
+    @RequestMapping(value = "/loginparam", method = RequestMethod.POST)
+    public Boolean loginparam(HttpServletResponse response, @RequestParam User user) {
+        int i = template.selectOne("login", user);
+        Cookie cookie = new Cookie("login", "true");
         response.addCookie(cookie);
         log.info("查询到到结果是" + i);
         if (i == 1) {
@@ -44,7 +56,7 @@ public class UserManager {
     public Boolean addUser(HttpServletRequest request, @RequestBody User user) {
         Boolean x = verifyCookies(request);
         int result=0;
-        if(x!=null){
+        if(x!=false){
             result = template.insert("addUser",user);
         }
         if(result > 0){
