@@ -10,7 +10,7 @@ spring:
     name: userManager
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/course
+    url: jdbc:mysql://192.168.5.184:3306/course
     username: admin
     password: 123456a
 
